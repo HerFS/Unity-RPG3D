@@ -17,7 +17,7 @@ public class ShopPopupUI : MonoBehaviour
 
     [Header("Panel")]
     [SerializeField]
-    private RectTransform _popupUIPanel;
+    private RectTransform _throwPanel;
     public GameObject InputPanel;
     [SerializeField]
     private GameObject _background;
@@ -101,15 +101,30 @@ public class ShopPopupUI : MonoBehaviour
         #endregion
     }
 
+    private void OnEnable()
+    {
+        if (SelectShopItemSlot != null)
+        {
+            _ItemName.text = SelectShopItemSlot.ItemData.Name;
+        }
+    }
+
+    private void OnDisable()
+    {
+        HideUI();
+    }
+
     public void ShowUI()
     {
-        _popupUIPanel.gameObject.SetActive(true);
+        this.gameObject.SetActive(true);
+        _throwPanel.gameObject.SetActive(true);
         _background.SetActive(true);
     }
 
     public void HideUI()
     {
-        _popupUIPanel.gameObject.SetActive(false);
+        this.gameObject.SetActive(false);
+        _throwPanel.gameObject.SetActive(false);
         _background.SetActive(false);
     }
 }

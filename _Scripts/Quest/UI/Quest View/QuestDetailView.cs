@@ -64,12 +64,10 @@ public class QuestDetailView : MonoBehaviour
         var questSystem = QuestSystem.Instance;
 
         questSystem.onQuestRegistered += AddQuestTracker;
-
         _cancelButton.onClick.AddListener(CancelQuest);
         _cancelButton.gameObject.SetActive(false);
         _trackerButton.onClick.AddListener(ShowTrackerView);
         _trackerButton.gameObject.SetActive(false);
-
     }
 
     private List<T> CreatePool<T>(T prefab, int count, RectTransform parent) where T : MonoBehaviour
@@ -111,7 +109,9 @@ public class QuestDetailView : MonoBehaviour
 
             if (Target == taskTracker.TargetQuest)
             {
+                AddQuestTracker();
                 taskTracker.gameObject.SetActive(true);
+                break;
             }
         }
     }

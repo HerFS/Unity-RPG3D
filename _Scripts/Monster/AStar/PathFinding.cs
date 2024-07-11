@@ -6,7 +6,7 @@ using UnityEngine;
 /*
  * File     : PathFinding.cs
  * Desc     : 길찾기
- * Date     : 2024-06-30
+ * Date     : 2024-07-11
  * Writer   : 정지훈
  */
 
@@ -47,7 +47,7 @@ public class PathFinding : MonoBehaviour
         PriorityQueue openSet = new PriorityQueue();
         HashSet<Node> closedSet = new HashSet<Node>();
 
-        openSet.MaxEelemnt = NodeGrid.NumberOfGrids.x * NodeGrid.NumberOfGrids.y;
+        openSet.MaxElement = NodeGrid.NumberOfGrids.x * NodeGrid.NumberOfGrids.y;
         openSet.Initialize();
         openSet.Enqueue(startNode.FCost, startNode);
 
@@ -75,7 +75,7 @@ public class PathFinding : MonoBehaviour
             closedSet.Add(currentNode);
 
             // 이웃노드를 가져와서 값을 계산한 후 오픈 셋에 추가한다.
-            foreach (var n in NodeGrid.GetNeighbours(currentNode))
+            foreach (var n in NodeGrid.GetNeighbors(currentNode))
             {
                 if (!n.IsWalkable || closedSet.Contains(n))
                 {
@@ -106,79 +106,6 @@ public class PathFinding : MonoBehaviour
         }
     }
 
-    //void FindPath(Vector3 startPos, Vector3 targetPos)
-    //{
-    //    Stopwatch sw = new Stopwatch();
-
-    //    Node startNode = NodeGrid.GetNodePosition(startPos);
-    //    Node targetNode = NodeGrid.GetNodePosition(targetPos);
-
-    //    List<Node> openSet = new List<Node>();
-    //    HashSet<Node> closedSet = new HashSet<Node>();
-    //    sw.Reset();
-    //    sw.Start();
-    //    openSet.Add(startNode);
-    //    sw.Stop();
-    //    print(sw.ElapsedTicks + "ticks");
-    //    while (openSet.Count > 0)
-    //    {
-    //        #region 
-    //        Node currentNode = openSet[0];
-    //        for (int i = 1; i < openSet.Count; i++)
-    //        {
-    //            if (openSet[i].FCost < currentNode.FCost || (openSet[i].FCost == currentNode.FCost && openSet[i].HCost < currentNode.HCost))
-    //            {
-    //                currentNode = openSet[i];
-    //            }
-    //        }
-    //        #endregion
-
-    //        #region 가장 낮은 값을 가진 노드가 종착노드면 탐색을 종료한다.
-    //        if (currentNode == targetNode)
-    //        {
-    //            RetracePath(startNode, targetNode);
-    //            return;
-    //        }
-    //        #endregion
-
-    //        #region 
-    //        openSet.Remove(currentNode);
-    //        closedSet.Add(currentNode);
-    //        #endregion
-
-    //        #region 
-    //        foreach (Node n in NodeGrid.GetNeighbours(currentNode))
-    //        {
-    //            if (!n.IsWalkable || closedSet.Contains(n))
-    //            {
-    //                continue;
-    //            }
-
-    //            int g = currentNode.GCost + GetDistance(currentNode, n);
-    //            int h = GetDistance(n, targetNode);
-    //            int f = g + h;
-
-    //            // 
-    //            if (!openSet.Contains(n))
-    //            {
-    //                n.GCost = g;
-    //                n.HCost = h;
-    //                n.ParentNode = currentNode;
-    //                openSet.Add(n);
-    //            }
-    //            else
-    //            {
-    //                if (n.FCost > f)
-    //                {
-    //                    n.GCost = g;
-    //                    n.ParentNode = currentNode;
-    //                }
-    //            }
-    //        }
-    //        #endregion
-    //    }
-    //}
-
     private void RetracePath(Node startNode, Node endNode)
     {
         List<Node> path = new List<Node>();
@@ -190,14 +117,8 @@ public class PathFinding : MonoBehaviour
             currentNode = currentNode.ParentNode;
         }
 
-        for (int i = 0; i < path.Count - 1; ++i)
-        {
-            path[i] = path[i + 1];
-        }
-
         path.Reverse();
         Path = path;
-        //NodeGrid.Path = path;
     }
 
     private int GetDistance(Node nodeA, Node nodeB)

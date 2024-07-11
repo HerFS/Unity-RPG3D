@@ -6,7 +6,7 @@ using UnityEngine;
  * File     : PlayerStatus.cs
  * Desc     : BaseEntitiyStatus 상속
  *            플레이어의 데이터들
- * Date     : 2024-06-30
+ * Date     : 2024-07-10
  * Writer   : 정지훈
  */
 

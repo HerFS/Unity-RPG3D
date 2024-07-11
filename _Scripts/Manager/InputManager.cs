@@ -6,7 +6,7 @@ using UnityEngine.InputSystem;
 /*
  * File     : InputManager.cs
  * Desc     : 플레이어 키 입력
- * Date     : 2024-06-30
+ * Date     : 2024-07-10
  * Writer   : 정지훈
  */
 
@@ -467,15 +467,12 @@ public class InputManager : Singleton<InputManager>
     {
         if (context.started)
         {
-            if (context.started)
-            {
-                _isLeftShift = true;
-            }
+            _isLeftShift = true;
+        }
 
-            if (context.canceled)
-            {
-                _isLeftShift = false;
-            }
+        if (context.canceled)
+        {
+            _isLeftShift = false;
         }
     }
 

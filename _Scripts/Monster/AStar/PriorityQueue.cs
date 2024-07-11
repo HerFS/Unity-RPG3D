@@ -5,20 +5,20 @@ using UnityEngine;
 /*
  * File     : PriorityQueue.cs
  * Desc     : 우선순위 큐
- * Date     : 2024-06-30
+ * Date     : 2024-07-11
  * Writer   : 정지훈
  */
 
 public class PriorityQueue
 {
-    public int MaxEelemnt;
+    public int MaxElement;
 
     public Node[] Heap;
     public int CurrentSize;
 
     public void Initialize()
     {
-        Heap = new Node[MaxEelemnt];
+        Heap = new Node[MaxElement];
     }
     public bool IsEmpty()
     {
@@ -27,7 +27,7 @@ public class PriorityQueue
 
     public bool IsFull()
     {
-        return CurrentSize == MaxEelemnt;
+        return CurrentSize == MaxElement;
     }
 
     public void Enqueue(int fCost, Node node)
@@ -63,7 +63,7 @@ public class PriorityQueue
         {
             if ((child < CurrentSize) && (Heap[child].FCost > Heap[child + 1].FCost))
             {
-                child++;
+                ++child;
             }
 
             if (temp.FCost <= Heap[child].FCost)
@@ -78,22 +78,5 @@ public class PriorityQueue
         }
 
         Heap[parent] = temp;
-    }
-
-    public void Display()
-    {
-        if (IsEmpty())
-        {
-            return;
-        }
-
-        int _index = 1;
-        for (int i = 1; i <= CurrentSize; ++i)
-        {
-            if (i == _index)
-            {
-                _index *= 2;
-            }
-        }
     }
 }

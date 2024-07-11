@@ -5,7 +5,7 @@ using UnityEngine;
 /*
  * File     : NodeGrid.cs
  * Desc     : 길찾기 범위 그리드
- * Date     : 2024-06-18
+ * Date     : 2024-07-11
  * Writer   : 정지훈
  */
 
@@ -25,7 +25,6 @@ public class NodeGrid : MonoBehaviour
 
     [HideInInspector]
     public Transform StartPos;
-    //public List<Node> Path = new List<Node>();
 
     private void Awake()
     {
@@ -57,9 +56,9 @@ public class NodeGrid : MonoBehaviour
         }
     }
 
-    public List<Node> GetNeighbours(Node node)
+    public List<Node> GetNeighbors(Node node)
     {
-        List<Node> neighbours = new List<Node>();
+        List<Node> neighbors = new List<Node>();
 
         for (int x = -1; x <= 1; ++x)
         {
@@ -75,11 +74,11 @@ public class NodeGrid : MonoBehaviour
 
                 if (checkX > -1 && checkX < _gridSizeX && checkZ > -1 && checkZ < _gridSizeZ)
                 {
-                    neighbours.Add(Grid[checkX, checkZ]);
+                    neighbors.Add(Grid[checkX, checkZ]);
                 }
             }
         }
-        return neighbours;
+        return neighbors;
     }
 
     public Node GetNodePosition(Vector3 position)
@@ -102,35 +101,11 @@ public class NodeGrid : MonoBehaviour
             }
         }
 
-
         return Grid[_x, _z];
     }
 
     void OnDrawGizmos()
     {
         Gizmos.DrawWireCube(transform.position, new Vector3(NumberOfGrids.x, 1, NumberOfGrids.y));
-
-        //if (Grid != null)
-        //{
-
-        //    Node playernode = GetNodePosition(StartPos.position);
-
-        //    foreach (Node n in Grid)
-        //    {
-        //        Gizmos.color = (n.IsWalkable) ? Color.white : Color.red;
-
-        //        if (playernode == n)
-        //        {
-        //            Gizmos.color = Color.black;
-        //        }
-        //        else
-        //        {
-        //            if (Path != null && Path.Contains(n))
-        //                Gizmos.color = Color.black;
-        //        }
-
-        //        Gizmos.DrawCube(n.NodePosition, Vector3.one * (_nodeSize - 0.1f));
-        //    }
-        //}
     }
 }

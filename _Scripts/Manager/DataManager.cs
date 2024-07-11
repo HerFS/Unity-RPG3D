@@ -6,7 +6,7 @@ using UnityEngine;
 /*
  * File     : DataManager.cs
  * Desc     : 데이터 관리
- * Date     : 2024-06-30
+ * Date     : 2024-07-10
  * Writer   : 정지훈
  */
 
@@ -40,7 +40,7 @@ public static class JsonHelper
 }
 
 [System.Serializable]
-public class PlayerInfo
+public struct PlayerInfo
 {
     public string Name;
     public float WalkSpeed;

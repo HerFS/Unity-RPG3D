@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.IO;
 using Newtonsoft.Json.Linq;
 using UnityEngine;
 
@@ -15,11 +16,11 @@ using UnityEngine;
 public class QuestSystem : MonoBehaviour
 {
     #region Save Path
-    private const string KSaveRootPath = "QuestSystem";
-    private const string KActiveQuestsSavePath = "ActiveQuests";
-    private const string KCompletedQuestsSavePath = "CompletedQuests";
-    private const string KActiveAchievementsSavePath = "ActiveAchievements";
-    private const string KCompletedAchievementsSavePath = "CompletedAchievements";
+    private readonly string _questDataFilePath = Application.dataPath + "/Resources/QuestData.json";
+    private const string _activeQuestsSavePath = "ActiveQuests";
+    private const string _completedQuestsSavePath = "CompletedQuests";
+    private const string _activeAchievementsSavePath = "ActiveAchievements";
+    private const string _completedAchievementsSavePath = "CompletedAchievements";
     #endregion
 
     #region Events
@@ -95,8 +96,6 @@ public class QuestSystem : MonoBehaviour
         _questDatabase = Resources.Load<QuestDatabase>("QuestDatabase");
         _achievementDatabase = Resources.Load<QuestDatabase>("AchievementDatabase");
 
-        //Load();
-
         if (!Load())
         {
             foreach (var achievement in _achievementDatabase.Quests)
@@ -163,26 +162,27 @@ public class QuestSystem : MonoBehaviour
     private void Save()
     {
         var root = new JObject();
-        root.Add(KActiveQuestsSavePath, CreateSaveDatas(_activeQuests));
-        root.Add(KCompletedQuestsSavePath, CreateSaveDatas(_completedQuests));
-        root.Add(KActiveAchievementsSavePath, CreateSaveDatas(_activeAchievements));
-        root.Add(KCompletedAchievementsSavePath, CreateSaveDatas(_completedAchievements));
 
-        PlayerPrefs.SetString(KSaveRootPath, root.ToString());
-        PlayerPrefs.Save();
+        root.Add(_activeQuestsSavePath, CreateSaveDatas(_activeQuests));
+        root.Add(_completedQuestsSavePath, CreateSaveDatas(_completedQuests));
+        root.Add(_activeAchievementsSavePath, CreateSaveDatas(_activeAchievements));
+        root.Add(_completedAchievementsSavePath, CreateSaveDatas(_completedAchievements));
+
+        File.WriteAllText(_questDataFilePath, root.ToString());
     }
 
     private bool Load()
     {
-        if (PlayerPrefs.HasKey(KSaveRootPath))
+        if (File.Exists(_questDataFilePath))
         {
-            var root = JObject.Parse(PlayerPrefs.GetString(KSaveRootPath));
+            var root = File.ReadAllText(_questDataFilePath);
+            var test = JObject.Parse(root);
+            
+            LoadSaveData(test[_activeQuestsSavePath], _questDatabase, LoadActiveQuest);
+            LoadSaveData(test[_completedQuestsSavePath], _questDatabase, LoadCompletedQuests);
 
-            LoadSaveData(root[KActiveQuestsSavePath], _questDatabase, LoadActiveQuest);
-            LoadSaveData(root[KCompletedQuestsSavePath], _questDatabase, LoadCompletedQuests);
-
-            LoadSaveData(root[KActiveAchievementsSavePath], _achievementDatabase, LoadActiveQuest);
-            LoadSaveData(root[KCompletedAchievementsSavePath], _achievementDatabase, LoadCompletedQuests);
+            LoadSaveData(test[_activeAchievementsSavePath], _achievementDatabase, LoadActiveQuest);
+            LoadSaveData(test[_completedAchievementsSavePath], _achievementDatabase, LoadCompletedQuests);
 
             return true;
         }
