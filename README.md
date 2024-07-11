@@ -5,7 +5,8 @@ RPG Portfolio
 - 개발 기간 : 2024.04.30 ~ 2024.06.27 (약 2개월)
 - 형상 관리 : Git Desktop
 # 2. 개발 환경 - Unity 2022.3.4f1 (LTS)
-- C# - Window 10  # 3. 기술 문서
+- C# - Window 10
+# 3. 기술 문서
 - 준비중
 # 4. 블로그
 - https://herfs.tistory.com/category/Unity/3D%20Project
