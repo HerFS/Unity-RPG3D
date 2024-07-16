@@ -11,6 +11,6 @@ RPG Portfolio
 # 4. 블로그
 - https://herfs.tistory.com/category/Unity/3D%20Project
 # 5. 플레이 영상
-- 준비중
+- https://www.youtube.com/watch?v=nC4Eh0wqjxg
 # 6. 게임 다운로드
 - 준비중
