@@ -6,8 +6,10 @@ RPG Portfolio
 - 형상 관리 : Git Desktop
 # 2. 개발 환경
 - Unity 2022.3.4f1 (LTS)
+- .NET Standard 2.1
+- Visual Studio Community 2022 Version 17.0.5
 - C#
-- Window 10
+- Windows 10
 # 3. 기술 문서
 - 준비중
 # 4. 블로그
