@@ -10,11 +10,9 @@ RPG Portfolio
 - Visual Studio Community 2022 Version 17.0.5
 - C#
 - Windows 10
-# 3. 기술 문서
-- 준비중
-# 4. 블로그
+# 3. 블로그
 - https://herfs.tistory.com/category/Unity/3D%20Project
-# 5. 플레이 영상
+# 4. 플레이 영상
 - https://www.youtube.com/watch?v=nC4Eh0wqjxg
-# 6. 게임 다운로드
+# 5. 게임 다운로드
 - 준비중
