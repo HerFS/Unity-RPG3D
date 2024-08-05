@@ -15,4 +15,4 @@ RPG Portfolio
 # 4. 플레이 영상
 - https://www.youtube.com/watch?v=nC4Eh0wqjxg
 # 5. 게임 다운로드
-- 준비중
+- https://drive.google.com/file/d/1kbb6nXT2gSyVAmnz9_i88_Evbc9Nb6jR/view?usp=drive_link
